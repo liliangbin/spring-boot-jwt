@@ -6,10 +6,12 @@ import com.jwt.start.model.UserInfo;
 import com.jwt.start.repository.UserInfoRepository;
 import com.jwt.start.service.Audience;
 import com.jwt.start.service.JwtHelper;
+import com.jwt.start.utils.JwtUtil;
 import com.jwt.start.utils.MyUtils;
 import com.jwt.start.utils.ResultMsg;
 import com.jwt.start.utils.ResultStatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,9 +29,17 @@ public class JWTController {
     @Autowired
     private Audience audienceEntity;
 
-    @RequestMapping("/oauth")
-    public Object getAccessToken(@RequestBody LoginPara loginPara) {
+    @PostMapping("/login")
+    public String string(){
 
+        String jwt = JwtUtil.generateToken("admin");
+
+        return jwt;
+
+    }
+    @RequestMapping("/oauth/token")
+    public Object getAccessToken(String clientId,String username,String password) {
+        LoginPara loginPara= new LoginPara(clientId,username,password);
         ResultMsg resultMsg;
         try {
             if (loginPara.getClientId() == null

@@ -56,4 +56,12 @@ public class LoginPara {
 
     private String captchaValue;
 
+    public LoginPara(String clientId, String userName, String password) {
+        this.clientId = clientId;
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public LoginPara() {
+    }
 }

@@ -3,12 +3,13 @@ package com.jwt.start.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * @author liliangbin dumpling1520@gmail.com
  * @date 2018/1/21  15:55
  */
-@Configuration
+@Component
 public class Audience {
 
     @Value("${audience.clientId}")
@@ -17,10 +18,12 @@ public class Audience {
     @Value("${audience.base64Secret}")
 
     private String base64Secret;
+
     @Value("${audience.name}")
 
     private String name;
     @Value("${audience.expiresSecond}")
+
     private int expiresSecond;
 
 
