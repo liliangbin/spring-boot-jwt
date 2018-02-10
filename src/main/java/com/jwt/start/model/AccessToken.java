@@ -1,13 +1,19 @@
 package com.jwt.start.model;
 
+import org.apache.shiro.authc.AuthenticationToken;
+
 /**
  * @author liliangbin dumpling1520@gmail.com
  * @date 2018/1/21  15:13
  */
-public class AccessToken {
+public class AccessToken implements AuthenticationToken {
 
     private String access_token;
     private String token_type;
+
+    public AccessToken(String access_token) {
+        this.access_token = access_token;
+    }
 
     public String getAccess_token() {
         return access_token;
@@ -34,4 +40,17 @@ public class AccessToken {
     }
 
     private long expires_in;
+
+    public AccessToken() {
+    }
+
+    @Override
+    public Object getPrincipal() {
+        return access_token;
+    }
+
+    @Override
+    public Object getCredentials() {
+        return access_token;
+    }
 }

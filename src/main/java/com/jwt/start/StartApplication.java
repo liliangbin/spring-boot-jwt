@@ -39,14 +39,14 @@ public class StartApplication {
 		return registrationBean;
 	}*/
 
-	@Bean
+/*	@Bean
 	public FilterRegistrationBean jwtFilter() {
 		final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
 		JwtAuthenticationFilter filter = new JwtAuthenticationFilter(
 				"/user/**");
 		registrationBean.setFilter(filter);
 		return registrationBean;
-	}
+	}*/
 
 
 }

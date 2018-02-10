@@ -1,5 +1,6 @@
 package com.jwt.start.controller;
 
+import com.jwt.start.Bean.ResponseBean;
 import com.jwt.start.model.AccessToken;
 import com.jwt.start.model.LoginPara;
 import com.jwt.start.model.UserInfo;
@@ -10,11 +11,9 @@ import com.jwt.start.utils.JwtUtil;
 import com.jwt.start.utils.MyUtils;
 import com.jwt.start.utils.ResultMsg;
 import com.jwt.start.utils.ResultStatusCode;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author liliangbin dumpling1520@gmail.com
@@ -33,10 +32,24 @@ public class JWTController {
     public String string(){
 
         String jwt = JwtUtil.generateToken("admin");
-
         return jwt;
 
+
+
     }
+
+    @GetMapping("/require_auth")
+    @RequiresAuthentication
+    public ResponseBean requireAuth() {
+        return new ResponseBean(200, "You are authenticated", null);
+    }
+
+    @GetMapping("/name")
+    public String bjb(){
+        System.out.println("nihaosijie");
+        return  "wulala;;a";
+    }
+
     @RequestMapping("/oauth/token")
     public Object getAccessToken(String clientId,String username,String password) {
         LoginPara loginPara= new LoginPara(clientId,username,password);
@@ -64,6 +77,7 @@ public class JWTController {
                     return resultMsg;
                 }
             }
+
             //拼装accessToken
             String accessToken = JwtHelper.createJWT(loginPara.getUserName(), String.valueOf(user.getName()),
                     user.getRole(), audienceEntity.getClientId(), audienceEntity.getName(),

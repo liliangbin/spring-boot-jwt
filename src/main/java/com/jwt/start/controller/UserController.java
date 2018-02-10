@@ -5,6 +5,7 @@ import com.jwt.start.repository.UserInfoRepository;
 import com.jwt.start.utils.JwtUtil;
 import com.jwt.start.utils.ResultMsg;
 import com.jwt.start.utils.ResultStatusCode;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.web.bind.annotation.*;
@@ -24,14 +25,13 @@ public class UserController {
     private UserInfoRepository userRepositoy;
 
     @RequestMapping("getuser")
+    @RequiresAuthentication
     public Object getUser(int id)
     {
         UserInfo userEntity = userRepositoy.findUserInfoById(id);
         ResultMsg resultMsg = new ResultMsg(ResultStatusCode.OK.getErrcode(), ResultStatusCode.OK.getErrmsg(), userEntity);
         return resultMsg;
     }
-
-
 
     @RequestMapping("getusers")
     public Object getUsers(String role)
