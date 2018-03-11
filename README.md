@@ -74,7 +74,7 @@ jwt做一个授权管理 api
 #### 因为要做的是前后端分离，所以也就是有了现在的这个样子，，放弃session  cookie， 使用jwt鉴权。
 
 - apache shiro 当然还有其他的功能，，，另外有一个关于shiro的例子，
-- https://github.com/liliangbin/apache-
+- https://github.com/liliangbin/apache-shiro
 
 
 
